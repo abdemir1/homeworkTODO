@@ -23,6 +23,7 @@ namespace todoHW.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.ToDo.Include(t => t.Category);
+            //.Where(t=> t.isCompleted == false).OrderBy(t=>t.RemainingHour)
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -48,7 +49,7 @@ namespace todoHW.Controllers
         // GET: ToDo/Create
         public IActionResult Create()
         {
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name");
+            ViewBag.CategorySelectList = new SelectList(_context.Categories, "ID", "Name");
             return View();
         }
 
@@ -65,7 +66,7 @@ namespace todoHW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", toDo.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name", toDo.CategoryID);
             return View(toDo);
         }
 
@@ -82,7 +83,7 @@ namespace todoHW.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", toDo.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name", toDo.CategoryID);
             return View(toDo);
         }
 
@@ -118,7 +119,7 @@ namespace todoHW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "ID", toDo.CategoryID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "ID", "Name", toDo.CategoryID);
             return View(toDo);
         }
 
@@ -152,6 +153,34 @@ namespace todoHW.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public async Task<IActionResult> MakeComplete(int ID)
+        {
+            var todoItemItem = _context.ToDo.FirstOrDefault(t=>t.ID==ID);
+            if(todoItemItem == null)
+            {
+                return NotFound();
+            }
+            todoItemItem.isCompleted = true;
+            todoItemItem.CompletedDate = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> MakeIncomplete(int ID)
+        {
+            var todoItemItem = _context.ToDo.FirstOrDefault(t => t.ID == ID);
+            if (todoItemItem == null)
+            {
+                return NotFound();
+            }
+            todoItemItem.isCompleted = false;
+            todoItemItem.CompletedDate = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         private bool ToDoExists(int id)
         {
             return _context.ToDo.Any(e => e.ID == id);

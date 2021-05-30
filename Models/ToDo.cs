@@ -36,7 +36,7 @@ namespace todoHW.Models
         {
             get
             {
-                var remainingtime = (DateTime.Now - DueDate);
+                var remainingtime = (DueDate - DateTime.Now);
                     return (int)remainingtime.TotalHours;
             }
         }
