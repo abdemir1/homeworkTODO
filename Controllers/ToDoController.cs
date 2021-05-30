@@ -20,7 +20,7 @@ namespace todoHW.Controllers
         }
 
         // GET: ToDo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SearchViewModel searchModel)
         {
             var applicationDbContext = _context.ToDo.Include(t => t.Category);
             //.Where(t=> t.isCompleted == false).OrderBy(t=>t.RemainingHour)
