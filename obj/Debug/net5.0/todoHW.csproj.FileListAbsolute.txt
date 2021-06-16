@@ -167,3 +167,4 @@ C:\Users\Ayşe Başak Demir\source\repos\todoHW\todoHW\obj\Debug\net5.0\Razor\Vi
 C:\Users\Ayşe Başak Demir\source\repos\todoHW\todoHW\obj\Debug\net5.0\Razor\Views\ToDo\Details.cshtml.g.cs
 C:\Users\Ayşe Başak Demir\source\repos\todoHW\todoHW\obj\Debug\net5.0\Razor\Views\ToDo\Edit.cshtml.g.cs
 C:\Users\Ayşe Başak Demir\source\repos\todoHW\todoHW\obj\Debug\net5.0\Razor\Views\ToDo\Index.cshtml.g.cs
+C:\Users\Ayşe Başak Demir\source\repos\todoHW\todoHW\obj\Debug\net5.0\Razor\Views\Shared\Components\CategoryMenu\default.cshtml.g.cs

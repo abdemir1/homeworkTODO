@@ -12,6 +12,8 @@ namespace todoHW.Models
             public string SearchText { get; set; }
             public bool ShowAll { get; set; }
 
+            public int CategoryID { get; set; }
+
             public List<ToDo> Result { get; set; }
 
         }
